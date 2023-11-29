@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Storage;
 class BlogController extends Controller
 {
@@ -16,7 +17,8 @@ class BlogController extends Controller
     }
     public function show($id){
         $blog = Blog::find($id);
-        return view("blogs.show",["blog" => $blog]);
+        $comments = $blog->comments;
+        return view("blogs.show",["blog" => $blog,"comments" => $comments]);
     }
     public function create(){
         return view("blogs.create");
@@ -68,5 +70,17 @@ class BlogController extends Controller
         Storage::delete("images/".$blog->image_url);
         $blog->delete();
         return to_route("blogs.index")->with('success',"Blog deleted successfully");
+    }
+
+    public function addComment(Request $request,$id){
+        $blog = Blog::find($id);
+
+        $comment = new Comment();
+
+        $comment->comments = $request->comment;
+
+        $blog->comments()->save($comment);
+
+        return Back();
     }
 }

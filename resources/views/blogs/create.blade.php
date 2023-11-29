@@ -54,3 +54,9 @@
     </div>
 </div>
 @endsection
+
+@push("create")
+    <script>
+        console.log("Create Script")
+    </script>
+@endpush

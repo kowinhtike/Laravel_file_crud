@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,7 @@ Route::controller(BlogController::class)->group(function(){
     Route::get('blogs/edit/{id}',"edit")->name("blogs.edit");
     Route::post('blogs/update/{id}',"update")->name("blogs.update");
     Route::get('blogs/delete/{id}',"destroy")->name("blogs.destroy");
+    Route::post("blogs/comment/{id}","addComment")->name("blogs.comment");
 });
+
+Route::get('/users/store',[UserController::class,"store"]);

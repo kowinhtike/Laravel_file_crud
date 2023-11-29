@@ -27,3 +27,9 @@
     </div>
 </div>
 @endsection
+
+@push("index")
+    <script>
+        console.log("This script for index")
+    </script>
+@endpush

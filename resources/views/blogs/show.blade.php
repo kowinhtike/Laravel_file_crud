@@ -20,6 +20,25 @@
             <br><br>
             <a href="{{ route("blogs.edit",["id" => $blog->id]) }}" class="btn btn-primary">Edit</a>
             <a href="{{ route("blogs.destroy",["id" => $blog->id]) }}" class="btn btn-danger">Delete</a>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Comments</h1>
+                        @foreach ($comments as $comment)
+                            <div class="alert alert-info">{{ $comment->comments }}</div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <form action="{{ route("blogs.comment",["id"=>$blog->id]) }}" method="POST">
+                @csrf
+                <div class="mb-3">
+                    <label for="cmt">Add Comment</label>
+                    <textarea name="comment" class="form-control" id="cmt"  rows="5"></textarea>
+                </div>
+                <button class="btn btn-dark mb-3" type="submit">Submit</button>
+            </form>
         </div>
     </div>
 </div>
